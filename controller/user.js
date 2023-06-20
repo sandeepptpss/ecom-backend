@@ -5,23 +5,39 @@ const mongoose = require('mongoose');
 
 const User = model.User;
 // Create
-exports.createUser= async(req, res) => {
-  const user  = new User(req.body);
+// exports.createUser= async(req, res) => {
+//   const user  = new User(req.body);
 
 
-let result=  user.save((err,user)=>{
-    console.log({err,user})
-    if(err){
+// let result=  user.save((err,user)=>{
+//     console.log({err,user})
+//     if(err){
+//       res.status(400).json(err);
+//     } else{
+//       res.status(201).json(user);
+//     }
+//   })
+
+//   // result=result.toObject();
+//   // delete result.password();
+//   // res.send(result);
+// };
+exports.createUser = async (req, res) => {
+  const user = new User(req.body);
+
+  user.save((err, savedUser) => {
+    if (err) {
       res.status(400).json(err);
-    } else{
-      res.status(201).json(user);
+    } else {
+      // Delete the password before sending the response
+      savedUser.password = undefined;
+      res.status(201).json(savedUser);
     }
-  })
-
-  // result=result.toObject();
-  // delete result.password();
-  // res.send(result);
+  });
 };
+
+
+
 // get all users data
 exports.getAllUsers = async (req, res) => {
   const users = await User.find();

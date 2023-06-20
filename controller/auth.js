@@ -9,9 +9,7 @@ exports.Login= async (req, res) => {
 
   if(req.body.password  && req.body.email){
     let users = await User.findOne(req.body).select("-password");
-
-
-    if(users){
+   if(users){
   res.send(users)
     }else{
       res.send('User is not found')
