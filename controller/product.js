@@ -63,6 +63,8 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
+
+
 exports.getAllProduct = async (req, res) => {
   const products = await Product.find();
   res.json(products);

@@ -10,6 +10,9 @@ const productRouter = require('./routes/product');
 const authRouter = require('./routes/auth');
 
 
+
+
+
 //db connection
 main().catch(err => console.log(err));
 async function main() {
