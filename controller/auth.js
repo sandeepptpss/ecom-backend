@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const User = model.User;
 // Create
 
-
 exports.Login= async (req, res) => {
 
   if(req.body.password  && req.body.email){
