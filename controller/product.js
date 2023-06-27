@@ -42,13 +42,26 @@ exports.createProduct = async (req, res) => {
   }
 };
 
-exports.getProduct = async (req, res)=>{
-  const id = req.params.id;
-  console.log({id})
-  const product = await Product.findById(id);
+exports.getProduct = async (req, res) => {
+  // const id = req.params.id;
+  // console.log({id})
+  const product = await Product.findById({_id:req.params.id});
   res.json(product);
+};
 
-}
+
+
+exports.updateProduct = async (req, res) => {
+  const id = req.params.id;
+  try{
+  const doc = await Product.updateOne({_id:id},req.body,{new:true})
+  res.status(201).json(doc);
+  }
+  catch(err){
+    console.log(err);
+    res.status(400).json(err);
+  }
+};
 
 exports.getAllProduct = async (req, res) => {
   const products = await Product.find();
